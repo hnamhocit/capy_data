@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class TopCommands
+    public static class TopCommands
     {
         public const string GetTopChapter = "getTopChapter";
         public const string GetTopGuild = "getTopGuild";

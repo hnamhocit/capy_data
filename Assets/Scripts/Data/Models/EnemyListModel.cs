@@ -1,10 +1,19 @@
+using Newtonsoft.Json;
+
 namespace Data.Models
 {
     public class IEnemyList : Base
     {
+        [JsonProperty("dialog")]
         public string dialog;
-        public int enemyCount;
-        public IEnemy[] enemies; // Json -> List<Enemy>
-        public IPlayCurrent[] getWhenDone; // Json -> List<PlayCurrent>
+
+        [JsonProperty("count")]
+        public int count;
+
+        [JsonProperty("enemies")]
+        public IEnemy[] enemies;
+
+        [JsonProperty("getWhenDone")]
+        public IPlayCurrent[] getWhenDone;
     }
 }

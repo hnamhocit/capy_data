@@ -2,18 +2,17 @@ using UnityEngine;
 using Data.Socket;
 using System.Threading.Tasks;
 using Data.Controllers;
-using Newtonsoft.Json;
+using Data.Names;
+using Data.Commands;
+using Data.Models;
 
 public class LoadTest : MonoBehaviour
 {
-    private SocketManager socketManager;
     private PlayerController playerController;
 
     void Awake()
     {
-        var _socketManager = new SocketManager();
-        socketManager = _socketManager;
-        playerController = new PlayerController(_socketManager);
+        playerController = new PlayerController();
     }
 
     // Start is called before the first frame update
@@ -21,11 +20,10 @@ public class LoadTest : MonoBehaviour
     {
         try
         {
-            await socketManager.Init("DEBUG1");
+            await SocketManager.Instance.Init("DEBUG1");
 
-            var response = await playerController.GetProfile();
-
-            Debug.Log($"Full Battle Maps Response JSON: {Newtonsoft.Json.JsonConvert.SerializeObject(response, Formatting.Indented)}");
+            var res = await playerController.GetProfile();
+            Debug.Log(res.data.username);
         }
         catch (System.Exception ex)
         {

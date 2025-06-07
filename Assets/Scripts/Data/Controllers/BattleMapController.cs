@@ -1,28 +1,28 @@
-using Data.Socket;
-using Data.Commands;
-using Data.Names;
-using Data.Models;
 using System.Threading.Tasks;
+using Data.Commands;
+using Data.Models;
+using Data.Names;
+using Data.Socket;
 
 namespace Data.Controllers
 {
-    class BattleMapController
+    public class BattleMapController
     {
-        private SocketManager socketManager;
-
-        public BattleMapController(SocketManager manager)
+        public async Task<IResponse<IBattleMap[]>> GetBattleMaps()
         {
-            socketManager = manager;
+            return await SocketManager.Instance.EmitWithAck<IResponse<IBattleMap[]>>(
+                EventNames.BATTLE_MAP,
+                BattleMapCommands.GetBattleMaps
+            );
         }
 
-        public async Task<IResponse<dynamic[]>> GetBattleMaps()
+        public async Task<IResponse<IBattleMap>> GetBattleMap(int id)
         {
-            return await socketManager.EmitWithAck<IResponse<dynamic[]>>(EventNames.BATTLE_MAP, BattleMapCommands.GetBattleMaps);
-        }
-
-        public async Task<IResponse<dynamic>> GetBattleMap(int id)
-        {
-            return await socketManager.EmitWithAck<IResponse<dynamic>>(EventNames.BATTLE_MAP, BattleMapCommands.GetBattleMap, new { id });
+            return await SocketManager.Instance.EmitWithAck<IResponse<IBattleMap>>(
+                EventNames.BATTLE_MAP,
+                BattleMapCommands.GetBattleMap,
+                new { id }
+            );
         }
     }
 }

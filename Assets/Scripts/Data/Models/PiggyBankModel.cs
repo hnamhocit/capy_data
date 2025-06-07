@@ -1,11 +1,22 @@
+using Newtonsoft.Json;
+
 namespace Data.Models
 {
-    class IPiggyBank : Base
+    public class IPiggyBank : Base
     {
+        [JsonProperty("currentLevel")]
         public int currentLevel;
+
+        [JsonProperty("staminaSpendedInLevel")]
         public int staminaSpendedInLevel;
-        public long? dateTimeUnlockLevel; // BigInt? -> long?
-        public long? purchaseTimeLastLevel; // BigInt? -> long?
+
+        [JsonProperty("dateTimeUnlockLevel")] // BigInt? map sang long?
+        public long? dateTimeUnlockLevel;
+
+        [JsonProperty("purchaseTimeLastLevel")] // BigInt? map sang long?
+        public long? purchaseTimeLastLevel;
+
+        [JsonProperty("userUUID")]
         public string userUUID;
     }
 }

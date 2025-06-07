@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class ShopCommands
+    public static class ShopCommands
     {
         public const string OpenEquipmentChess = "openEquipmentChess";
         public const string OpenLegendaryMysteriousChest = "openLegendaryMysteriousChest";

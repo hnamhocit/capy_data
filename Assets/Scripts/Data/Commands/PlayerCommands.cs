@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class PlayerCommands
+    public static class PlayerCommands
     {
         public const string GetProfile = "getProfile";
         public const string GetUser = "getUser";
@@ -10,6 +10,7 @@ namespace Data.Commands
         public const string SetPower = "setPower";
         public const string SetRank = "setRank";
         public const string GetInventory = "getInventory";
+        public const string SaveInventory = "saveInventory";
         public const string GetUserEquipment = "getUserEquipments";
     }
 }

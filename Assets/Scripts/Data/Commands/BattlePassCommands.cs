@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class BattlePassCommands
+    public static class BattlePassCommands
     {
         public const string GetUserBattlePasses = "getUserBattlePasses";
         public const string GetUserBattlePass = "getUserBattlePass";

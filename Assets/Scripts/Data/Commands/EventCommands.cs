@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class EventCommands
+    public static class EventCommands
     {
         public const string GetEvents = "getEvents";
         public const string GetEvent = "getEvent";

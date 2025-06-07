@@ -1,23 +1,37 @@
+using System.Threading.Tasks;
 using Data.Commands;
+using Data.Models;
 using Data.Names;
 using Data.Socket;
-using System.Threading.Tasks;
-using Data.Models;
 
 namespace Data.Controllers
 {
-    class BattlePassController
+    public class BattlePassController
     {
-        private SocketManager socketManager;
-
-        async Task<IBattlePass[]> GetBattlePasses()
+        public async Task<IResponse<IBattlePass[]>> GetUserBattlePasses()
         {
-            return await socketManager.EmitWithAck<IBattlePass[]>(EventNames.BATTLE_PASS, BattlePassCommands.GetUserBattlePasses);
+            return await SocketManager.Instance.EmitWithAck<IResponse<IBattlePass[]>>(
+                EventNames.BATTLE_PASS,
+                BattlePassCommands.GetUserBattlePasses
+            );
         }
 
-        async Task<IBattlePass> GetBattlePass(int id)
+        public async Task<IResponse<IBattlePass>> GetUserBattlePass(BattlePassType type)
         {
-            return await socketManager.EmitWithAck<IBattlePass>(EventNames.BATTLE_PASS, BattlePassCommands.GetUserBattlePass, new { id });
+            return await SocketManager.Instance.EmitWithAck<IResponse<IBattlePass>>(
+                EventNames.BATTLE_PASS,
+                BattlePassCommands.GetUserBattlePass,
+                new { type }
+            );
+        }
+
+        public async Task<IResponse<bool>> UpdateBattlePass(object data)
+        {
+            return await SocketManager.Instance.EmitWithAck<IResponse<bool>>(
+                EventNames.BATTLE_PASS,
+                BattlePassCommands.UpdateUserBattlePass,
+                data
+            );
         }
     }
 }

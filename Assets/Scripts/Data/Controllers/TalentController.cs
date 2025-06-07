@@ -1,9 +1,19 @@
+using System.Threading.Tasks;
+using Data.Commands;
+using Data.Names;
 using Data.Socket;
 
 namespace Data.Controllers
 {
-    class TalentController
+    public class TalentController
     {
-        private readonly SocketManager socketManager;
+        public async Task<IResponse<dynamic>> IncreaseTalentLevel(string name)
+        {
+            return await SocketManager.Instance.EmitWithAck<IResponse<dynamic>>(
+                EventNames.TALENT,
+                TalentCommands.IncreaseTalentLevel,
+                new { name }
+            );
+        }
     }
 }

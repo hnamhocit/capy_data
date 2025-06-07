@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 
 namespace Data.Models
 {
-    [System.Serializable]
     public class SocketPayload<T>
     {
         public string cmd;

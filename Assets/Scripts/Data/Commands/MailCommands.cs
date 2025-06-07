@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class MailCommands
+    public static class MailCommands
     {
         public const string SendMail = "sendMail";
         public const string ClaimMail = "claimMail";

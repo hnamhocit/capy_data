@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class GuildLogCommands
+    public static class GuildLogCommands
     {
 
     }

@@ -1,6 +1,6 @@
 namespace Data.Commands
 {
-    static class GuildCommands
+    public static class GuildCommands
     {
         public const string GetGuilds = "getGuilds";
         public const string GetGuild = "getGuild";

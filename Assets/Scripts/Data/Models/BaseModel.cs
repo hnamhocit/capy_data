@@ -5,7 +5,7 @@ namespace Data.Models
 {
     public class Base
     {
-        [JsonProperty("code")]
+        [JsonProperty("id")]
         public int id;
 
         [JsonProperty("createdAt")]

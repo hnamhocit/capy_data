@@ -7,15 +7,35 @@ using Data.Models;
 using UnityEngine;
 using Newtonsoft.Json;
 
-
 namespace Data.Socket
 {
     public class SocketManager
     {
-        private SocketIOUnity socket;
+        private static SocketManager _instance;
+        public static SocketManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SocketManager();
+                }
+                return _instance;
+            }
+        }
+
+        public SocketIOUnity socket;
+
+        private SocketManager() { }
 
         public async Task Init(string token)
         {
+            if (socket != null && socket.Connected) // Tránh init lại nếu đã kết nối
+            {
+                Debug.LogWarning("SocketManager already connected. Skipping Init.");
+                return;
+            }
+
             socket = new SocketIOUnity(SocketConstants.BaseUri.ToString(), new SocketIOOptions
             {
                 Auth = new Dictionary<string, string>{
@@ -24,7 +44,7 @@ namespace Data.Socket
                 Transport = SocketIOClient.Transport.TransportProtocol.WebSocket
             });
 
-            // socket.JsonSerializer = new JsonSerializer();
+            socket.JsonSerializer = new SocketIOClient.Newtonsoft.Json.NewtonsoftJsonSerializer();
 
             socket.OnConnected += (sender, e) =>
             {
@@ -73,10 +93,7 @@ namespace Data.Socket
 
                 await socket.EmitAsync(eventName, ack =>
                 {
-                    string rawAckJson = ack.GetValue().ToString();
-                    Debug.Log($"SocketManager: Raw ACK JSON for event {eventName}: {rawAckJson}");
                     T response = ack.GetValue<T>();
-                    Debug.Log($"SocketManager: Deserialized object (T={typeof(T).Name}): {Newtonsoft.Json.JsonConvert.SerializeObject(response, Formatting.Indented)}");
                     tcs.SetResult(response);
                 }, jsonPayload);
 

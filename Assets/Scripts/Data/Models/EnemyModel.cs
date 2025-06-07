@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Data.Models
 {
     public enum EnemyType
@@ -13,10 +15,20 @@ namespace Data.Models
 
     public class IEnemy
     {
+        [JsonProperty("hp")]
         public int hp;
+
+        [JsonProperty("atk")]
         public int atk;
-        public int enemyCount;
-        public EnemyType enemyType; // Sử dụng enum
-        public int? enemyListId; // Int? -> int?
+
+        [JsonProperty("count")]
+        public int count;
+
+        [JsonProperty("type")]
+        public EnemyType type;
+
+        [JsonProperty("enemyListId")]
+        public int? enemyListId;
     }
 }
+

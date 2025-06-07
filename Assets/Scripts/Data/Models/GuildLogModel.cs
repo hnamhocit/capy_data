@@ -1,9 +1,16 @@
+using Newtonsoft.Json;
+
 namespace Data.Models
 {
     public class IGuildLog : Base
     {
+        [JsonProperty("guildId")]
         public int guildId;
-        public long timestamp; // BigInt -> long
+
+        [JsonProperty("timestamp")] // BigInt thường được map sang long trong C#
+        public long timestamp;
+
+        [JsonProperty("message")]
         public string message;
     }
 }
