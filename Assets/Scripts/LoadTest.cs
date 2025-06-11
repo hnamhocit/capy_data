@@ -1,10 +1,7 @@
-using UnityEngine;
-using Data.Socket;
 using System.Threading.Tasks;
 using Data.Controllers;
-using Data.Names;
-using Data.Commands;
-using Data.Models;
+using Data.Socket;
+using UnityEngine;
 
 public class LoadTest : MonoBehaviour
 {
@@ -33,8 +30,5 @@ public class LoadTest : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 }
